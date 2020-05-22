@@ -1,0 +1,12 @@
+version: '2'
+services:
+  backup:
+    image: backup-server:latest
+    volumes:
+      - ./data:/home/data
+      - ~/.config/rclone:/root/.config/rclone
+    environment:
+      - REMOTE=scaleway
+      - BUCKET=server-backups
+      - DIRECTORY=test-101
+      - NAME=backupdb
