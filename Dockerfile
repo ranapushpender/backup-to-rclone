@@ -12,7 +12,9 @@ RUN mkdir -p /usr/share/man/man1
 RUN cp rclone.1 /usr/share/man/man1/
 COPY . /root
 RUN chmod a+x /root/backup.sh
+RUN chmod a+x /root/entrypoint.sh
 RUN mkdir /root/backups
-RUN echo "* * * * * /root/backup.sh > /root/backup.log" >> /var/spool/cron/crontabs/root
+RUN echo "0 23 * * * /root/backup.sh > /root/backup.log" >> /var/spool/cron/crontabs/root
+VOLUME ["/home"]
 WORKDIR /root
-CMD crond -l 8 -f
+CMD /root/backup.sh && crond -l 8 -f
