@@ -17,6 +17,7 @@ RUN chmod a+x /root/backup.sh
 RUN chmod a+x /root/entrypoint.sh
 RUN mkdir /root/backups
 RUN mkdir /root/backups-temp
+RUN mkdir /root/restore
 RUN echo "0 23 * * * /root/backup.sh > /root/backup.log" >> /var/spool/cron/crontabs/root
 VOLUME ["/home"]
 WORKDIR /root
