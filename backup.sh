@@ -1,7 +1,7 @@
 export DATE=`date +"%d-%m-%Y_%H-%M-%S"`
 export GZIP=-9
 
-if ! [[ -z "RESTORE_BACKUP" ]]; then
+if ! [[ -z "$RESTORE_BACKUP" ]]; then
     curl $RESTORE_URL -o ./restore/backup.tar.gz
     tar xzfv ./restore/backup.tar.gz --directory=./restore
     cp -r ./restore/home/. /home/
