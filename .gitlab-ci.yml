@@ -3,8 +3,6 @@ stages:
 docker-build:
   image: docker:19.03
   stage: build
-  services:
-    - docker:dind
   script:
     - apk update && apk add git
     - echo "$GITLAB_PASSWORD" | docker login -u "$GITLAB_USER" --password-stdin registry.gitlab.com
