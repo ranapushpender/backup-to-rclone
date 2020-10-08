@@ -1,0 +1,36 @@
+kind: pipeline
+type: docker
+name: default
+
+steps:
+- name: build-image
+  image: docker:dind
+  volumes:
+  - name: dockersock
+    path: /var/run
+  environment:
+      GITLAB_USER:
+          from_secret: GITLAB_USER
+      GITLAB_PASSWORD:
+          from_secret: GITLAB_PASSWORD
+  commands:
+  - sleep 30
+  - export GITLAB_USER=$GITLAB_USER
+  - export GITLAB_PASSWORD=$GITLAB_PASSWORD
+  - ./build_script.sh
+
+services:
+- name: docker
+  image: docker:dind
+  privileged: true
+  volumes:
+  - name: dockersock
+    path: /var/run
+
+volumes:
+- name: dockersock
+  temp: {}
+
+trigger:
+    event:
+    - tag
