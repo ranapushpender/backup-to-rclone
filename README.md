@@ -4,6 +4,8 @@ A docker container to make automated backups of your application's data and data
 Also supports restoring data from a older backup on startup for easy deployment of applications.
 
 Only those databases are backed up for which configuration environment variables have been provided.
+### Build Status
+[View Build Status](https://drone.stackweb.net/ranapushpender/backup-server)
 ### Instructions
 * Pull the latest image using:
 ```
