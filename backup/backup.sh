@@ -1,12 +1,13 @@
+#!/bin/sh
 export DATE=`date +"%d-%m-%Y_%H-%M-%S"`
 export GZIP=-9
-
+set -e
+echo "Waiting for some time for server to come up"
+sleep 120
 if ! [[ -z "$RESTORE_BACKUP" ]]; then
     curl $RESTORE_URL -o ./restore/backup.tar.gz
     tar xzfv ./restore/backup.tar.gz --directory=./restore
     cp -r ./restore/home/. /home/
-    echo "Waiting for some time for server to come up"
-    sleep 60
     if ! [[ -z "$MYSQL_HOST" ]]; then
         echo "Restoring mysql"
         export mysql_backup_name=`ls ./restore/root/backups-temp | grep sql`
@@ -44,9 +45,4 @@ echo "Archive Made"
 echo "Copying to remote"
 rclone copy --progress /root/backups/* $REMOTE:$BUCKET/$DIRECTORY
 echo "Copied to remote"
-
-echo "Deleting temporary files"
-#Removind data after backup
-rm -rf /root/backups/*
-rm -rf /root/backups-temp/*
 echo "Backup Complete"

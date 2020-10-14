@@ -4,8 +4,9 @@ docker-build:
   image: docker:19.03
   stage: build
   script:
-    - export GITLAB_USER=$GITLAB_USER
-    - export GITLAB_PASSWORD=$GITLAB_PASSWORD
+    - export TAG_NAME=`git rev-parse HEAD`
+    - export DOCKER_USER=$DOCKER_USER
+    - export DOCKER_PASSWORD=$DOCKER_PASSWORD
     - ./build_script.sh
   only:
     - tags

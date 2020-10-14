@@ -9,14 +9,15 @@ steps:
   - name: dockersock
     path: /var/run
   environment:
-      GITLAB_USER:
-          from_secret: GITLAB_USER
-      GITLAB_PASSWORD:
-          from_secret: GITLAB_PASSWORD
+      DOCKER_USER:
+          from_secret: DOCKER_USER
+      DOCKER_PASSWORD:
+          from_secret: DOCKER_PASSWORD
+      TAG_NAME: ${DRONE_TAG}
   commands:
   - sleep 30
-  - export GITLAB_USER=$GITLAB_USER
-  - export GITLAB_PASSWORD=$GITLAB_PASSWORD
+  - export DOCKER_USER=$DOCKER_USER
+  - export DOCKER_PASSWORD=$DOCKER_PASSWORD
   - ./build_script.sh
 
 services:
