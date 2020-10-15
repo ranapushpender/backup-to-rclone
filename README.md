@@ -1,15 +1,15 @@
-# Backup Server
+# Backup to rclone
 A docker container to make automated backups of your application's data and databases to object storage or any cloud server using rclone. Currently supports mysql and mongodb backups along with other persistent data that your application may have are supported to be backed up. Remote can be any s3 or cloud storage that rclone supports. 
 
 Also supports restoring data from a older backup on startup for easy deployment of applications.
 
 Only those databases are backed up for which configuration environment variables have been provided.
 ### Build Status
-[View Build Status](https://drone.stackweb.net/ranapushpender/backup-server)
+[View Build Status](https://drone.stackweb.net/ranapushpender/backup-to-rclone)
 ### Instructions
 * Pull the latest image using:
 ```
- docker pull ranapushpender/backup-server:latest
+ docker pull ranapushpender/backup-to-rclone:latest
 ```
 * Run the container using the following:
 ```
